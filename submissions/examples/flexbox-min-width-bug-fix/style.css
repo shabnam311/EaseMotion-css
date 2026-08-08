@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap');
+
+:root {
+    --bg-color: #f1f5f9;
+    --card-bg: #ffffff;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    font-family: 'Outfit', system-ui, sans-serif;
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 40px 20px;
+}
+
+.layout-container {
+    max-width: 900px;
+    width: 100%;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.title {
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin: 0 0 12px 0;
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+.showcase {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    justify-content: center;
+}
+
+.demo-card {
+    background: var(--card-bg);
+    padding: 32px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    border: 1px solid #e2e8f0;
+    width: 350px;
+}
+
+.demo-card h3 { margin: 0 0 12px 0; font-size: 1.3rem; }
+.demo-card p { color: var(--text-secondary); margin: 0 0 24px 0; font-size: 0.95rem; line-height: 1.5; }
+code { background: #f1f5f9; padding: 4px 8px; border-radius: 4px; color: #b91c1c; }
+
+.info-box {
+    width: 100%;
+    max-width: 732px;
+    background: #ecfdf5;
+    border: 1px solid #a7f3d0;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    margin: 32px auto 0 auto;
+}
+.info-box h4 { margin: 0 0 8px 0; color: #059669; }
+.info-box p { margin: 0; color: #047857; font-size: 0.9rem; }
+
+/* =========================================
+   Base Flex Container Styles
+   ========================================= */
+
+.flex-container {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    
+    /* We strictly limit the container width to 300px to force truncation */
+    width: 300px; 
+    box-sizing: border-box;
+}
+
+.icon {
+    font-size: 1.5rem;
+    flex-shrink: 0; /* Prevent the icon from getting crushed */
+}
+
+.content {
+    /* Apply standard text truncation properties */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+/* =========================================
+   Example 1: The Buggy Implementation
+   ========================================= */
+
+.buggy-content {
+    /* 
+       THE BUG: Even though we have text-overflow: ellipsis, the text refuses to truncate.
+       Instead, it visually spills outside the 300px container boundary. 
+       By default, Flex items have a minimum width of 'auto', which means they will 
+       never shrink smaller than the size of their unwrapped content!
+    */
+}
+
+/* =========================================
+   Example 2: The Fixed Implementation
+   ========================================= */
+
+.fixed-content {
+    /* 
+       THE FIX: We must explicitly override the browser's default behavior.
+       By setting min-width: 0, we allow the flex child to shrink smaller than its content,
+       which finally allows the text-overflow algorithm to step in and truncate the text!
+    */
+    min-width: 0;
+}

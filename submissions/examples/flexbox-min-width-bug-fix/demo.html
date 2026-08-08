@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexbox Min-Width Bug Fix - EaseMotion</title>
+    <!-- Include EaseMotion CSS -->
+    <link rel="stylesheet" href="../../../easemotion.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="layout-container">
+        <header class="header">
+            <h1 class="title">Flexbox Min-Width Bug Fix</h1>
+            <p class="subtitle">Resolving a notoriously frustrating CSS bug where long text inside a Flexbox child violently blows out the container's width instead of gracefully truncating with an ellipsis.</p>
+        </header>
+
+        <main class="showcase">
+            <!-- Buggy Demo -->
+            <div class="demo-card">
+                <h3>The Flex Blowout (Buggy)</h3>
+                <p>We want the long text to truncate with "..." but instead, the flex child forces the container to expand, ignoring the boundaries!</p>
+                
+                <div class="flex-container buggy-container">
+                    <div class="icon">🔍</div>
+                    <div class="content buggy-content">
+                        This is an incredibly long string of text that should absolutely truncate with an ellipsis but instead it ruins the entire layout.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fixed Demo -->
+            <div class="demo-card">
+                <h3>The Min-Width: 0 Fix (Fixed)</h3>
+                <p>By applying a single line of CSS, <code>min-width: 0;</code> to the flex child, we override the default algorithm and allow the text truncation to work flawlessly.</p>
+                
+                <div class="flex-container fixed-container">
+                    <div class="icon">🔍</div>
+                    <div class="content fixed-content">
+                        This is an incredibly long string of text that should absolutely truncate with an ellipsis and now it perfectly works.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <h4>Why does this happen?</h4>
+                <p>By default, flex children have a <code>min-width: auto</code> which tells the browser "never shrink smaller than my content". We must explicitly override it with <code>min-width: 0</code>!</p>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
