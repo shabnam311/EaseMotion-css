@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+    --bg-color: #0f172a;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --item-bg: #1e293b;
+    --item-border: #334155;
+    
+    /* Marquee Configuration */
+    --marquee-duration: 30s;
+    --marquee-gap: 24px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+.layout-container {
+    width: 100%;
+    padding: 60px 0;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 48px;
+    padding: 0 20px;
+}
+
+.title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin: 0 0 12px 0;
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+/* =========================================
+   Infinite Marquee Mechanics
+   ========================================= */
+
+.marquee-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    padding: 20px 0;
+}
+
+.marquee-track {
+    display: flex;
+    gap: var(--marquee-gap);
+    width: max-content;
+    
+    /* The animation that drives the scrolling */
+    animation: marquee-scroll var(--marquee-duration) linear infinite;
+}
+
+/* Pause on hover for better UX */
+.marquee-track:hover {
+    animation-play-state: paused;
+}
+
+.marquee-group {
+    display: flex;
+    gap: var(--marquee-gap);
+    /* Essential for layout calculation */
+    flex-shrink: 0;
+}
+
+@keyframes marquee-scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        /* We shift exactly one group width + one gap to make the loop seamless */
+        transform: translateX(calc(-100% - var(--marquee-gap)));
+    }
+}
+
+/* =========================================
+   Item Styling
+   ========================================= */
+
+.marquee-item {
+    background: var(--item-bg);
+    border: 1px solid var(--item-border);
+    padding: 16px 32px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #cbd5e1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 150px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.marquee-item:hover {
+    background: #2dd4bf;
+    color: #0f172a;
+    border-color: #2dd4bf;
+    transform: scale(1.05);
+}
+
+/* =========================================
+   Fade Edges (Gradient Masks)
+   ========================================= */
+   
+.marquee-fade {
+    position: absolute;
+    top: 0;
+    width: 150px;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.marquee-fade-left {
+    left: 0;
+    background: linear-gradient(to right, var(--bg-color) 0%, transparent 100%);
+}
+
+.marquee-fade-right {
+    right: 0;
+    background: linear-gradient(to left, var(--bg-color) 0%, transparent 100%);
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+        /* Stop the constant movement if motion sensitivity is on */
+        animation-play-state: paused !important;
+        /* Allow horizontal scrolling instead */
+        transform: none !important;
+    }
+    
+    .marquee-wrapper {
+        overflow-x: auto;
+    }
+    
+    .marquee-fade {
+        display: none;
+    }
+}

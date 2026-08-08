@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinite Marquee Slider - EaseMotion</title>
+    <!-- Include EaseMotion CSS -->
+    <link rel="stylesheet" href="../../../easemotion.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="layout-container">
+        <header class="header">
+            <h1 class="title">Trusted by top companies</h1>
+            <p class="subtitle">A seamless, CSS-only infinite scrolling marquee. Hover over the track to pause the animation.</p>
+        </header>
+
+        <div class="marquee-wrapper">
+            <!-- Fade edges (optional) -->
+            <div class="marquee-fade marquee-fade-left"></div>
+            <div class="marquee-fade marquee-fade-right"></div>
+            
+            <div class="marquee-track">
+                <!-- Group 1 (Original) -->
+                <div class="marquee-group">
+                    <div class="marquee-item">Acme Corp</div>
+                    <div class="marquee-item">Globex</div>
+                    <div class="marquee-item">Soylent</div>
+                    <div class="marquee-item">Initech</div>
+                    <div class="marquee-item">Umbrella</div>
+                    <div class="marquee-item">Massive Dynamic</div>
+                </div>
+                <!-- Group 2 (Duplicate for seamless loop) -->
+                <div class="marquee-group" aria-hidden="true">
+                    <div class="marquee-item">Acme Corp</div>
+                    <div class="marquee-item">Globex</div>
+                    <div class="marquee-item">Soylent</div>
+                    <div class="marquee-item">Initech</div>
+                    <div class="marquee-item">Umbrella</div>
+                    <div class="marquee-item">Massive Dynamic</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
